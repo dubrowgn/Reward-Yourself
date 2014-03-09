@@ -20,16 +20,16 @@ class FitocracyClient {
 		$this->feedUrl = "https://www.fitocracy.com/profile/$username/?feed";
 	} // __construct( )
 
-	public function login($username, $password) {
+	public function login() {
 		// update logged-in flag
 		$this->loggedIn = false;
 
 		// check username
-		if (empty($username))
+		if (empty($this->username))
 			return ['error' => 'Username cannot be empty'];
 
 		// check password
-		if (empty($password))
+		if (empty($this->password))
 			return ['error' => 'Password cannot be empty'];
 
 		// make GET request to /accounts/login/ to get CSRF token
@@ -45,11 +45,11 @@ class FitocracyClient {
 		// init request parts
 		$headers = ['Referer: https://www.fitocracy.com/accounts/login/'];
 		$body = implode("&", [
-			"csrfmiddlewaretoken=$csrf",
+			"csrfmiddlewaretoken=" . $csrf,
 			"is_username=1",
 			"json=1",
-			"username=$username",
-			"password=$password"
+			"username=" . $this->username,
+			"password=" . $this->password
 		]);
 
 		// make login request
@@ -72,7 +72,7 @@ class FitocracyClient {
 	public function getTotalXp() {
 		// auto login if not already
 		if ($this->loggedIn !== true) {
-			$r = $this->login($this->username, $this->password);
+			$r = $this->login();
 			if (!empty($r['error']))
 				return $r;
 		} // if
