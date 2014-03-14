@@ -84,7 +84,7 @@ class FitocracyClient {
 
 		// parse out total xp
 		$match = preg_match('/<li id="stat-points">.*?<div class="stat-value" title="(\d+)">/s', $response['body'], $matches);
-		if ($match === false)
+		if ($match === false || $match === 0)
 			return ['error' => "Could not find total XP in feed response."];
 
 		// return total xp as an int value
