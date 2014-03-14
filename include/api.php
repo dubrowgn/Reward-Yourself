@@ -32,14 +32,34 @@ class auth {
 			return "Password cannot be longer than 255 characters";
 		
 		// password_hash() returns false on failure
-		$hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+		$hash = password_hash($password, PASSWORD_DEFAULT);
 		if (!$hash)
 			return "Failed to hash password";
 		
+		// check if username already exists
+		$error = null;
+		$rows = 0;
+		$query = "SELECT Username FROM User WHERE Username = ? LIMIT 1";
+		if ($stmt = $mysqli->prepare($query)) {
+			$stmt->bind_param("s", $username);
+			if (!$stmt->execute())
+				$error = $stmt->error;
+			else {
+				$stmt->store_result();
+				$rows = $stmt->num_rows;
+			}
+			$stmt->close();
+			if($rows == 1)
+				return "Username already exists. Please choose another.";
+		} // if
+		else {
+			$error = $stmt->error;
+		}
+		
 		// insert user into database
 		$error = null;
-		$query = "INSERT INTO user (username, hash) VALUES(?, ?)";
-		if ($stmt = $mysqli->prepare($query)) {
+		$query = "INSERT INTO User (Username, Hash) VALUES(?, ?)";
+		if ($stmt = $mysqli->prepare($query)) { 
 			$stmt->bind_param("ss", $username, $hash);
 			if (!$stmt->execute())
 				$error = $stmt->error;
@@ -48,7 +68,7 @@ class auth {
 		else {
 			$error = $mysqli->error;
 		} // else
-		
+
 		// return any errors
 		return $error;
 	} // create_user( )
@@ -72,7 +92,7 @@ class auth {
 			
 		// get user from database
 		$error = null;
-		$query = "SELECT id, hash FROM user WHERE username = ? LIMIT 1";
+		$query = "SELECT UserID, Hash FROM User WHERE Username = ? LIMIT 1";
 		if ($stmt = $mysqli->prepare($query)) {
 			$stmt->bind_param("s", $username);
 			if (!$stmt->execute())
@@ -125,7 +145,7 @@ class url {
 	CLASSES
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-
+//___________________________________________________________________(BasicHead)
 class BasicHead {
 	private $_css = "";
 	private $_js = "";
@@ -236,8 +256,135 @@ class BasicHead {
 		// close
 		echo "\t</head>\n";
 	} // echo( )
-} // class
+} // class ''BasicHead'
 
+//________________________________________________________________________(unit)
+class unit {
+	public static function create_unit ($mysqli, $name){
+		// validate unitName
+		if (empty($name))
+			return "Name cannot be empty";
+		if (strlen($name) > 255)
+			return "Name cannot be longer than 255 characters";
+		
+		// check if unit already exists
+		$error = null;
+		$rows = 0;
+		$query = "SELECT Name FROM Unit WHERE Name = ? LIMIT 1";
+		if ($stmt = $mysqli->prepare($query)) {
+			$stmt->bind_param("s", $name);
+			if (!$stmt->execute())
+				$error = $stmt->error;
+			else {
+				$stmt->store_result();
+				$rows = $stmt->num_rows;
+			}
+			$stmt->close();
+			if($rows == 1)
+				return "That unit already exists!";
+		} // if
+		else {
+			$error = $stmt->error;
+		}
+		
+		// insert user into database
+		$error = null;
+		$query = "INSERT INTO Unit (Name) VALUES(?)";
+		if ($stmt = $mysqli->prepare($query)) { 
+			$stmt->bind_param("s", $name);
+			if (!$stmt->execute())
+				$error = $stmt->error;
+			$stmt->close();
+		} // if
+		else {
+			$error = $mysqli->error;
+		} // else
+
+		// return any errors
+		return $error;
+	} // function 'creat unit'
+
+	public static function get_units($mysqli){
+		// get all units
+		$error = null;
+		$arr = null;
+		$query = "SELECT UnitID, Name FROM Unit";
+		if ($stmt = $mysqli->prepare($query)) {
+			if (!$stmt->execute())
+				$error = $stmt->error;
+			else {
+				//store values in array
+				$arr = [];
+				$stmt->bind_result($unitID, $name);
+				while ( $stmt->fetch() )
+					$arr[$unitID] = $name;
+			}
+			$stmt->close();
+			return $arr;
+		} // if
+		else {
+			$error = $stmt->error;
+		}
+	} // function 'get units'
+
+} // class 'unit'
+
+//________________________________________________________________________ (reward)
+class reward {
+
+	public static function create_reward ($mysqli, $rewardName, $unitPrice, $unitID){
+		// validate reward name
+		if (empty($rewardName))
+			return "Reward name cannot be empty";
+		if (strlen($rewardName) > 255)
+			return "Reward name cannot be longer than 255 characters";
+			
+		// validate unit price
+		if (empty($unitPrice))
+			return "Unit price cannot be empty";
+		if (strlen($unitPrice) > 255)
+			return "Unit price cannot be longer than 255 characters";
+		
+		// check if reward already exists
+		$error = null;
+		$rows = 0;
+		$query = "SELECT Name FROM Reward WHERE Name = ? AND UnitPrice = ?AND UnitID = ? LIMIT 1";
+		if ($stmt = $mysqli->prepare($query)) {
+			$stmt->bind_param("sss", $rewardName, $unitPrice, $unitID);
+			if (!$stmt->execute()) 
+				$error = $stmt->error;
+			else {
+				$stmt->store_result();
+				$rows = $stmt->num_rows;
+			}
+			$stmt->close();
+			if($rows == 1)
+				return "Reward already exists!";
+		} // if
+		else {
+			$error = $stmt->error;
+		}
+		
+		// insert user into database
+		$error = null;
+		$query = "INSERT INTO Reward (Name, UnitPrice, UnitID) VALUES(?, ?, ?)";
+		if ($stmt = $mysqli->prepare($query)) { 
+			$stmt->bind_param("sss", $rewardName, $unitPrice, $unitID);
+			if (!$stmt->execute())
+				$error = $stmt->error;
+			$stmt->close();
+		} // if
+		else {
+			$error = $mysqli->error;
+		} // else
+
+		// return any errors
+		return $error;
+	}// function 'create reward'
+	
+	
+	
+} // class 'reward'
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	GLOBAL FUNCTIONS
