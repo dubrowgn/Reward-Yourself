@@ -1,41 +1,45 @@
 <?php
 
-require ("include/class.fitocracy-client.php");
+require('include/application.php');
+require("include/class.fitocracy-client.php");
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
+$errors = [];
 
-if (!empty($username) && !empty($password)) {
+$r = new Request();
+$username = $r->post('username');
+$xp = null;
+
+if ($username === '')
+	$errors[] = 'A valid Fitocracy username is required';
+
+if (!empty($username)) {
 	// create new fitocracy client
-	$f = new FitocracyClient($username, $password);
+	$fc = new FitocracyClient(\config\fitocracy_username, \config\fitocracy_password);
 
 	// attempt to get total xp stat for user
-	$r = $f->getTotalXp();
+	$fcResult = $fc->getTotalXp($username);
+	if (isset($fcResult['error']))
+		$errors[] = $fcResult['error'];
+	else if (isset($fcResult['xp']))
+		$xp = $fcResult['xp'];
 } // if
 
-?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Curl Test</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
+$twig = twig();
+
+$body = $twig->render('admin/fitocracy-test.html', [
+	'error' => implode("\n", $errors),
+	'xp' => $xp,
+	'invalidUsername' => $username === '',
+	'username' => $username
+]);
+
+echo $twig->render('page.html', [
+	'title' => 'Fitocracy Integration Test',
+	'head' => '
 		<style>
 		form { max-width: 450px; }
-		</style>
-	</head>
-	<body>
-		<p>
-			<form name="input" action="curl.php" method="post">
-				<p class="bg-danger"><?php echo isset($r['error']) ? htmlspecialchars($r['error']) : ''; ?></p>
-				<p class="bg-info"><?php echo isset($r['xp']) ? 'Total XP: ' . $r['xp'] : ''; ?></p>
-				<div class="form-group<?php echo isset($_POST['username']) && empty($username) ? ' has-error' : ''; ?>">
-					<input type="text" name="username" class="form-control" value="<?php echo htmlspecialchars($username); ?>" maxlength="255" placeholder="Username" />
-				</div>
-				<div class="form-group<?php echo isset($_POST['password']) && empty($password) ? ' has-error' : ''; ?>">
-					<input type="password" name="password" class="form-control" maxlength="255" placeholder="Password" />
-				</div>
-				<button type="submit" class="btn btn-default">Get XP</button>
-			</form>
-		</p>
-	</body>
-</html>
+		</style>', 
+	'body' => $body
+]);
+
+?>
