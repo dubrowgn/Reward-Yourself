@@ -1,0 +1,21 @@
+.container {
+	max-width: 360px;
+}
+h1 {
+	text-align: center;
+}
+ul.nav a:hover{
+	color: rgb(14, 146, 193) !important;
+	background-color: rgb(102, 102, 102);
+}
+.navbar {
+	margin-bottom: 0px;
+	min-height: 0px;
+}
+.navbar-brand {
+	height: 0px;
+}
+form {
+	max-width: 360px;
+	margin: 0 auto;
+}

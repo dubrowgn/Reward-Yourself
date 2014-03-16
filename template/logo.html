@@ -1,0 +1,18 @@
+{# twig html template #}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{title}} | Reward Yourself</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="css/style.css" rel="stylesheet" media="screen">
+{{head|raw}}
+	</head>
+	<body>
+		<div style="text-align:center;"><img src="/img/logo.png" alt="Reward Yourself" /></div>
+		<h1>{{title}}</h1>
+		<div class="content">
+{{body|raw}}
+		</div>
+	</body>
+</html>

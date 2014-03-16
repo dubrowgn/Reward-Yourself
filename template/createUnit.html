@@ -1,0 +1,13 @@
+			<br/><br/><br/>
+
+			<form role="form" action="createUnit.php" method="post">
+				{% if error is not empty %}
+					<div class="alert alert-danger">{{error}}</div>
+				{% endif %}
+				<p> Please enter your details below. </p>
+				<div class="form-group">
+	 				<label for="unitName">Unite Name</label>
+					<input type="text" class="form-control" id="unitName" name="unitName" placeholder="Name" value="{{unitName}}" maxlength="255" />
+				</div>
+				<button type="submit" class="btn btn-info">Submit</button> 
+			</form>
