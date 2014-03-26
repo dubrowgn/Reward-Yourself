@@ -8,8 +8,8 @@
 $php_start_time = microtime(true);
 
 // load server config options
-require("config.php");
-require('lib/password.php');
+require("../application/config.php");
+require('../lib/password/password.php');
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	STATIC CLASSES

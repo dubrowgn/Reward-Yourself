@@ -3,9 +3,12 @@
 <html>
 	<head>
 		<title>{{title}} | Reward Yourself</title>
+{% block link %}{% endblock %}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block metadata %}{% endblock %}
 		<link href="css/bootstrap/bootstrap.css" rel="stylesheet" media="screen">
-{{head|raw}}
+{% block css %}{% endblock %}
+{% block javascript %}{% endblock %}
 	</head>
 	<body>
 		<div class="container">
@@ -23,7 +26,7 @@
 			</div>
 		</nav>
 		<div class="content">
-{{body|raw}}
+{% block body %}{% endblock %}
 		</div>
 	</body>
 </html>

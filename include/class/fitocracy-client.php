@@ -1,6 +1,6 @@
 <?php
 
-require("class.http-client.php");
+require("http-client.php");
 
 class FitocracyClient {
 	protected $client = null;

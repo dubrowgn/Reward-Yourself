@@ -1,18 +1,20 @@
 <?php
 
-require('include/application.php');
-require("include/class.fitocracy-client.php");
+require('application/application.php');
+require('application/class/fitocracy-client.php');
 
-$errors = [];
-
+// populate request variables
 $r = new Request();
+$errors = [];
 $username = $r->post('username');
 $xp = null;
 
-if ($username === '')
-	$errors[] = 'A valid Fitocracy username is required';
+// validation
+if ($r->isPost() && blank($username))
+	$errors['username'] = 'A valid Fitocracy username is required';
 
-if (!empty($username)) {
+// look-up total xp from Fitocracy
+if ($r->isPost() && !blank($username)) {
 	// create new fitocracy client
 	$fc = new FitocracyClient(\config\fitocracy_username, \config\fitocracy_password);
 
@@ -24,22 +26,13 @@ if (!empty($username)) {
 		$xp = $fcResult['xp'];
 } // if
 
+// output view
 $twig = twig();
-
-$body = $twig->render('admin/fitocracy-test.html', [
-	'error' => implode("\n", $errors),
+echo $twig->render('admin/fitocracy-test.html', [
+	'errors' => $errors,
 	'xp' => $xp,
-	'invalidUsername' => $username === '',
-	'username' => $username
-]);
-
-echo $twig->render('page.html', [
-	'title' => 'Fitocracy Integration Test',
-	'head' => '
-		<style>
-		form { max-width: 450px; }
-		</style>', 
-	'body' => $body
+	'username' => $username,
+	'invalidUsername' => $r->isPost() && blank($username)
 ]);
 
 ?>

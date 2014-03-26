@@ -11,12 +11,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="260"
+   height="129.99982"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/dubrowgn/Development/Reward-Yourself/img/logo-lg.png"
+   inkscape:export-xdpi="1800"
+   inkscape:export-ydpi="1800">
   <defs
      id="defs4">
     <pattern
@@ -123,7 +126,8 @@
     </linearGradient>
     <filter
        inkscape:collect="always"
-       id="filter6435">
+       id="filter6435"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="3.2"
@@ -152,7 +156,7 @@
            sodipodi:open="true"
            sodipodi:end="6.2763565"
            sodipodi:start="0"
-           d="m 340,327.36218 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 0,-2.76142 2.23858,-5 5,-5 2.7481,0 4.98112,2.21782 4.99988,4.96586"
+           d="m 340,327.36218 a 5,5 0 1 1 -1.2e-4,-0.0341"
            sodipodi:ry="5"
            sodipodi:rx="5"
            sodipodi:cy="327.36218"
@@ -170,7 +174,8 @@
     </clipPath>
     <filter
        inkscape:collect="always"
-       id="filter4193">
+       id="filter4193"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="2.1145838"
@@ -299,7 +304,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.5576087"
      inkscape:cx="51.968603"
-     inkscape:cy="99.084135"
+     inkscape:cy="99.084136"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -307,10 +312,21 @@
      inkscape:window-height="1029"
      inkscape:window-x="0"
      inkscape:window-y="29"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
     <inkscape:grid
        type="xygrid"
-       id="grid3759" />
+       id="grid3759"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="0px"
+       originy="7.0312501e-07px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -320,14 +336,15 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-922.36237)">
     <g
        id="g5848"
        clip-path="url(#clipPath5924)"
