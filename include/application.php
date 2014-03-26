@@ -1,7 +1,7 @@
 <?php
 
 // pull in config constants
-require(path('/application/config.php'));
+require(path('/include/config.php'));
 
 // pull in twig library
 require(path('/lib/Twig/Autoloader.php'));

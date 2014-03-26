@@ -8,7 +8,6 @@
 $php_start_time = microtime(true);
 
 // load server config options
-require("../application/config.php");
 require('../lib/password/password.php');
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

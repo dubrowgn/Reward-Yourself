@@ -10,8 +10,8 @@ const sql_username = "root";
 const sql_password = "password";
 const sql_database = "reward-yourself";
 
-const fitocracy_username = 'username';
-const fitocracy_password = 'password';
+const fitocracy_username = 'fitocracy@dubrowgn.com';
+const fitocracy_password = 'jdGCaj=,GQd/2V5)';
 
 const twig_path = '/template';
 const twig_cache = false;

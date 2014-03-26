@@ -1,0 +1,16 @@
+			<form role="form" action="login.php" method="post">
+				{% if error is not empty %}
+					<div class="alert alert-danger">{{error}}</div>
+				{% endif %}
+				<p2> Please enter your details below. </p>
+				<div class="form-group">
+	 			 <label for="username">Username</label>
+					<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{uername}}" maxlength="255" />
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Password" maxlength="255" ></input>
+				</div>
+				<button type="submit" class="btn btn-info">Submit</button> 
+				<a href="createUser.php">Create an Account</a>
+			</form>

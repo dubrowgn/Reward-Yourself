@@ -1,7 +1,7 @@
 <?php
 
-require('application/application.php');
-require('application/class/fitocracy-client.php');
+require('include/application.php');
+require(path('/include/class/fitocracy-client.php'));
 
 // populate request variables
 $r = new Request();
