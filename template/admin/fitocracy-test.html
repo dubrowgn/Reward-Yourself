@@ -1,20 +1,13 @@
 {# twig html template #}
-{% extends "page.html" %}
+{% extends "user-portal.html" %}
 
 {% set title = 'Fitocracy Integration Test' %}
-{% block css %}
-		<style>
-			form { max-width: 450px; }
-		</style>
-{% endblock %}
-{% block body %}
+{% block content %}
 			<form name="input" action method="post">
 				<div class="bg-danger">
-					<ul>
 {% for err in errors %}
-						<li>{{err}}</li>
+					{{err}}<br />
 {% endfor %}
-					</ul>
 				</div>
 				<div class="bg-info">{{xp is not empty ? 'Total XP: ' ~ xp : ''}}</div>
 				<div class="form-group{{invalidUsername ? ' has-error' : ''}}">

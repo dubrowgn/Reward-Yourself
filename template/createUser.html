@@ -13,3 +13,23 @@
 				</div>
 				<button type="submit" class="btn btn-info">Submit</button> 
 			</form>
+
+
+{# twig html template #}
+{% extends "user-portal.html" %}
+
+{% set title = 'Fitocracy Integration Test' %}
+{% block content %}
+			<form name="input" action method="post">
+				<div class="bg-danger">
+{% for err in errors %}
+					{{err}}<br />
+{% endfor %}
+				</div>
+				<div class="bg-info">{{xp is not empty ? 'Total XP: ' ~ xp : ''}}</div>
+				<div class="form-group{{invalidUsername ? ' has-error' : ''}}">
+					<input type="text" name="username" class="form-control" value="{{username}}" maxlength="255" placeholder="Username" />
+				</div>
+				<button type="submit" class="btn btn-default">Lookup XP</button>
+			</form>
+{% endblock %}

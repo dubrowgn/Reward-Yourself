@@ -7,8 +7,8 @@
 // start execution timer
 $php_start_time = microtime(true);
 
-// load server config options
-require('../lib/password/password.php');
+// pull in password shim
+require(__DIR__ . '/../lib/password/password.php');
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	STATIC CLASSES

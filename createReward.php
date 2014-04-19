@@ -24,23 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		url::redirect("home.php"); // index page
 } // if
 
-//create twig object
-$twig = twig();
-
 //get units from DB
 $units = unit::get_units($mysqli);
 
-
-$body = $twig->render('createReward.html', [
+// render template
+echo twig()->render('createReward.html', [
 	'error' => $error,
 	'rewardName' => $rewardName,
 	'units' => $units
 ]);
 
-echo $twig->render('page.html', [
-	'title' => 'Create Reward',
-	'body' => $body
-]);
-
+// close database
+$mysqli->close();
 
 ?>

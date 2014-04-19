@@ -1,5 +1,9 @@
-			<br/><br/><br/>
+{# twig html template #}
+{% extends "user-portal.html" %}
 
+{% set title = 'Create Reward' %}
+{% block content %}
+			<br/><br/><br/>
 			<form role="form" action="createReward.php" method="post">
 				{% if error is not empty %}
 					<div class="alert alert-danger">{{error}}</div>
@@ -25,3 +29,4 @@
 				<button type="submit" class="btn btn-info">Submit</button> 
 				<a href="createUnit.php">Create an Unit</a>
 			</form>
+{% endblock %}

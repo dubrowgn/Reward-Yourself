@@ -22,17 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		url::redirect("createReward.php"); // index page
 } // if
 
-//create twig object
-$twig = twig();
-
-$body = $twig->render('createUnit.html', [
+// render template
+echo twig()->render('createUnit.html', [
 	'error' => $error,
 	'unitName' => $unitName
-]);
-
-echo $twig->render('page.html', [
-	'title' => 'Create Unit',
-	'body' => $body
 ]);
 
 // close database
